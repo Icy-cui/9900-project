@@ -1,53 +1,62 @@
 // Object 对象
 let user = {
-    name: 'user',
-    age: 18,
-}
+    name: "John",
+    age: 30,
+    phone: "123456789",
+    sayHi() {
+      console.log("Hi");
+    },
+    sayName() {
+      console.log(this.name);
+    },
+  };
 
 // 箭头函数
-let add = (a, b) => a + b;
-let add1 = (a, b) => {
-    return a + b;
-}
+let sum = (a, b) => a + b;
+let array = [1, 2, 3, 4, 5, 100, 6, 9, 1100];
+array.sort((a, b) => a - b);
 
-let arr = [1,2,3]
-arr.forEach(func)
-
-setTimeout(() =>{}, 100)
+// setTimeout(() => console.log("Hello"), 1000);
+// setInterval(() => console.log("Hello"), 1000);
 
 // JSON 方法
-let a = JSON.stringify(user)
-let b = JSON.parse('{"name":"user","age":18}')
+let userStringify = JSON.stringify(user);
+// array
+let userParse = JSON.parse(userStringify);
 
-// This
-let obj = {
-    name: 'user',
-    age: 18,
+console.log(userStringify);
+console.log(userParse);
 
-    sayHi(){
-        console.log(this.name)
-    }
+// this
+user.sayName();
+
+// Promise, fetch 和 Async/await
+let url = 'https://jsonplaceholder.typicode.com/todos/1'
+
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(json => console.log(json)).catch(err => console.log(err));
+
+async function f(){
+    let response = await fetch(url);
+    let data = await response.json();
+    console.log(data);
 }
+f()
+// axios.post(url).then(res => console.log(res.data))
 
-user.sayHi()
-
-object.method()
-
-// Promise 链和 Async/await
-let promise = fetch('api').then(function(response){
-    if(response.status == 200){
-        return response.text()
-    } else {
-        alert('error')
-    }
-}).catch(error => console.log(error))
+// let promise = new Promise((resolve, reject) => {})
 
 // 在浏览器中储存数据
 // 1. cookie
-document.cookie = "user=joe"
+// 2. localStorage
+// 3. sessionStorage
+localStorage.setItem('name', 'John');
+localStorage.getItem('name'); // john
+localStorage.removeItem('name');
+localStorage.clear()
 
-localStorage
-sessionStorage
+// store.js
 
 // 跨域
-CORS
+// flask-CORS
