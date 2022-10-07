@@ -1,0 +1,28 @@
+{
+  "extends": ["plugin:vue/vue3-recommended", "prettier"],
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "import/no-dynamic-require": 0,
+    "semi": 2,
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "ignoreUrls": true,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "new-cap": [
+      2,
+      {
+        "capIsNew": false,
+        "newIsCap": true
+      }
+    ],
+    "no-param-reassign": 0,
+    "no-shadow": 0,
+    "no-underscore-dangle": 0
+  }
+}
