@@ -9,13 +9,15 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+import AcUnitOutlinedIcon from '@mui/icons-material/AcUnitOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from './Sidebar'
+import store from 'store'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -85,6 +87,13 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const handleLogout =()=>{
+    store.set('loginStatus', false);
+    navigate("/SignIn");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
   const handleSignUp = () => {
     navigate("/SignUp");
     setAnchorEl(null);
@@ -95,8 +104,29 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  // const loginStatus = localStorage.getItem("loginStatus");
+  const loginStatus = store.get("loginStatus");
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
+  const renderMenu = loginStatus ? (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleSignIn}>Profile</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </Menu>
+  ):(
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -180,8 +210,10 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <Sidebar />
           </IconButton>
+          {/* <AcUnitOutlinedIcon /> */}
+          <span class="iconfont">&#xe60c;</span>
           <Typography
             variant="h6"
             noWrap
