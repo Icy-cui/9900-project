@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { loginSuccess } from '../app/reducer'
 
 function Copyright(props) {
   return (
@@ -38,54 +40,24 @@ const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let email = data.get("email");
     let password = data.get("password");
-
-    // 1. axios
-    // axios.get('./api/user.json',{
-    //   email: email,
-    //   password: password
-    // }).then(function(res){
-    //   console.log(email, password)
-    //   let resData = res.data.data;
-    //   if(resData.email == email && resData.password == password){
-    //     // localStorage.setItem('user', JSON.stringify(resData));
-    //     localStorage.setItem('loginStatus', true);
-    //     navigate('/')
-    //   } else{
-    //     alert('Invalid email or password');
-    //   }
-    // }).catch((err) => console.log(err))
-
-    // 2. fetch api
-    // const res = fetch('../../api/user.json', {
-    //   method: 'GET',
-    // }).then((res) => {
-    //   // console.log(res)
-    //   if(res.status == 200){
-    //     res.json().then((data) => {
-    //       // console.log(data)
-    //       let resData = data.data;
-    //       localStorage.setItem('loginStatus', true);
-    //       navigate('/')
-    //     })
-    //   }
-    // })
     getRenderData();
   };
 
   const getRenderData = async () => {
     // 3. async await
     let res = await fetch("../../api/user.json", { method: "GET" });
-
     if (res.status == 200) {
       let data = await res.json();
       let resData = data.data;
-      localStorage.setItem("loginStatus", true);
+      // localStorage.setItem("loginStatus", true);
+      dispatch(loginSuccess())
       navigate("/");
     } else {
       throw new Error(res.status);

@@ -4,6 +4,7 @@ import Lifecycle from './Lifecycle';
 import Header from './components/Header';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Home from './pages/Home'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Home" element={<Home />} />
       </Routes>
       {/* <button onClick={()=>setShow(!show)}>unmount</button>
       {show ? <Lifecycle /> :""} */}
