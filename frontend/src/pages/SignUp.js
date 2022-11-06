@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import store from 'store'
 import { useNavigate } from 'react-router-dom';
+import theme from "../systemTheme";
 
 function Copyright(props) {
   return (
@@ -31,7 +32,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+// const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();

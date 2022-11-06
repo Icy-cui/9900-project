@@ -17,6 +17,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../app/reducer'
+import theme from "../systemTheme";
 
 function Copyright(props) {
   return (
@@ -36,7 +37,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+// const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
